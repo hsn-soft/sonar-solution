@@ -1,4 +1,6 @@
-﻿namespace Sonar.Solution.WorkFirst;
+﻿using System;
+
+namespace Sonar.Solution.WorkFirst;
 
 public class TestClass
 {
