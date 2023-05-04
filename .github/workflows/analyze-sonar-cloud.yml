@@ -53,10 +53,11 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"hsn-soft_sonar-solution" /o:"hsn-soft" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vstest.reportsPaths=TestResults/*.trx /d:sonar.cs.dotcover.reportsPaths="AppCoverageReport.html" /d:sonar.verbose=false /d:sonar.sourceEncoding=UTF-8
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"hsn-soft_sonar-solution" /o:"hsn-soft" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths="AppCoverageReport.xml" /d:sonar.verbose=false /d:sonar.sourceEncoding=UTF-8
           # Dotnet analysis start
-          dotnet restore --force
-          dotnet build --no-restore --no-incremental --configuration release
-          dotnet dotcover test --configuration release --dcReportType=HTML --dcOutput="AppCoverageReport.html" -r ./TestResults --logger "trx;LogFileName=testoutput.trx"
+          dotnet restore
+          dotnet build --no-restore --no-incremental
+          # dotnet dotcover test --dcReportType=HTML --dcOutput="AppCoverageReport.html" -r ./
+          dotnet dotсover test --dcReportType=XML --dcOutput="AppCoverageReport.xml" -r ./
           # Dotnet analysis end
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
