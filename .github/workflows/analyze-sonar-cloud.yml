@@ -53,11 +53,11 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"hsn-soft_sonar-solution" /o:"hsn-soft" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths="AppCoverageReport.xml" /d:sonar.verbose=false /d:sonar.sourceEncoding=UTF-8
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"hsn-soft_sonar-solution" /o:"hsn-soft" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.dotcover.reportsPaths="AppCoverageReport.xml" /d:sonar.verbose=true /d:sonar.sourceEncoding=UTF-8
           # Dotnet analysis start
           dotnet restore
           dotnet build --no-restore --no-incremental
           # dotnet dotcover test --dcReportType=HTML --dcOutput="AppCoverageReport.html" -r ./
-          dotnet dotсover test --dcReportType=XML --dcOutput="AppCoverageReport.xml" -r ./
+          dotnet dotсover test --dcReportType=XML --dcOutput="AppCoverageReport.xml"
           # Dotnet analysis end
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
