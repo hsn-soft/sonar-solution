@@ -2,8 +2,8 @@ name: 'Analyze Codecov'
 on:
   push:
     branches: [ dev ]
-  pull_request:
-    branches: [ dev ]
+#  pull_request:
+#    branches: [ dev ]
 jobs:
   build:
     name: 'Codecov Analyze JOB'
@@ -38,7 +38,7 @@ jobs:
         run: dotnet build --no-restore --no-incremental
       
       - name: Test
-        run: dotnet test --no-restore --no-build --collect:"XPlat Code Coverage" -r ./TestResults --verbosity normal
+        run: dotnet test --no-restore --no-build --collect:"XPlat Code Coverage" --verbosity detail
       
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
