@@ -28,4 +28,9 @@ public class TestClass
     {
         this.Balance /= x;
     }
+    
+    public void Test()
+    {
+        this.Balance = 0;
+    }
 }
